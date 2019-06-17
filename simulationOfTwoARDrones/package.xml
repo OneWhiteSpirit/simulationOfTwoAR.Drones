@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
-  <name>tum_simulator</name>
+  <name>simulationOfTwoARDrones</name>
   <version>0.0.0</version>
-  <description>The tum_simulator</description>
-  <maintainer email="nik-138@mail.ru">Nick</maintainer>
+  <description>The simulationOfTwoARDrones</description>
+  <maintainer email="email@gmail.com">Nick</maintainer>
   <license>BSD</license>
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>cvg_sim_msgs</run_depend>

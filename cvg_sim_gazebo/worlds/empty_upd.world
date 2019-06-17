@@ -128,7 +128,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/one-dc/catkin_ws/src/tum_simulator/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.stl</uri>
+              <uri>/home/one-dc/catkin_ws/src/simulationOfTwoAR.Drones/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.stl</uri>
             </mesh>
           </geometry>
           <surface>
@@ -261,7 +261,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/one-dc/catkin_ws/src/tum_simulator/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.dae</uri>
+              <uri>/home/one-dc/catkin_ws/src/simulationOfTwoAR.Drones/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -314,7 +314,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/one-dc/catkin_ws/src/tum_simulator/cvg_sim_gazebo/meshes/sonar_sensor/max_sonar_ez4.dae</uri>
+              <uri>/home/one-dc/catkin_ws/src/simulationOfTwoAR.Drones/cvg_sim_gazebo/meshes/sonar_sensor/max_sonar_ez4.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -534,7 +534,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/one-dc/catkin_ws/src/tum_simulator/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.stl</uri>
+              <uri>/home/one-dc/catkin_ws/src/simulationOfTwoAR.Drones/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.stl</uri>
             </mesh>
           </geometry>
           <surface>
@@ -667,7 +667,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/one-dc/catkin_ws/src/tum_simulator/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.dae</uri>
+              <uri>/home/one-dc/catkin_ws/src/simulationOfTwoAR.Drones/cvg_sim_gazebo/meshes/quadrotor/quadrotor_4.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -720,7 +720,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/one-dc/catkin_ws/src/tum_simulator/cvg_sim_gazebo/meshes/sonar_sensor/max_sonar_ez4.dae</uri>
+              <uri>/home/one-dc/catkin_ws/src/simulationOfTwoAR.Drones/cvg_sim_gazebo/meshes/sonar_sensor/max_sonar_ez4.dae</uri>
             </mesh>
           </geometry>
         </visual>
