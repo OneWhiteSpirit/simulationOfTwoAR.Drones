@@ -1,0 +1,227 @@
+#ROS installation
+http://wiki.ros.org/indigo/Installation/Ubuntu
+
+#Some steps for app global visibility 
+sudo mv eclipse /opt
+cd /opt
+sudo chmod -R 777 eclipse
+sudo ln -s /opt/eclipse/eclipse /usr/bin/eclipse
+
+# Activate python virtual enviroment
+source ~/PyCharmProjects/{ProjectName}/venv/bin/activate
+
+#Some setups for PyCharm
+https://gist.github.com/awesomebytes/c932b2502fab32d0c8bb
+#Start from title Install PyCharm
+
+# Run Rviz tool
+rosrun rviz rviz
+
+# Own robot build
+http://gazebosim.org/tutorials?tut=build_robot
+
+# or after install
+sudo ln -s /${path_to_pycharm.sh file} /usr/bin/${pycharm.sh filename}
+# change .local/share/applications/jetbrains-pycharm-ce.desktop as writed on http://wiki.ros.org/IDEs#PyCharm_.28community_edition.29
+# for showing icon you need to copy it to /usr/share/pixmaps and set var in jetbrains-pycharm-ce.desktop to Icon=${iconname}
+
+================================================
+#Launch file with 3 drones                     =
+https://github.com/basti35/tum_simulator       =
+================================================
+
+#Conversation about 3 drones
+https://github.com/dougvk/tum_simulator/pull/9
+
+
+
+
+#source /tmp/quickstart_ws/devel/setup.bash
+
+source /opt/ros/indigo/setup.bash          # Source ROS indigo to use Catkin
+mkdir -p /catkin_ws/src            # Make a new workspace and source space
+cd /catkin_ws                      # Navigate to the workspace root
+catkin init                                # Initialize it with a hidden marker file
+cd /catkin_ws/src                  # Navigate to the source space
+catkin create pkg pkg_a                    # Populate the source space with packages...
+catkin create pkg pkg_b
+catkin create pkg pkg_c --catkin-deps pkg_a
+catkin create pkg pkg_d --catkin-deps pkg_a pkg_b
+catkin list                                # List the packages in the workspace
+catkin build                               # Build all packages in the workspace
+source /catkin_ws/devel/setup.bash # Load the workspace's environment
+catkin clean     
+
+
+#Some installs before making tum_simulator and ardrone_autonomy 
+sudo apt-get install ros-indigo-gazebo-ros ros-indigo-gazebo-ros-control ros-indigo-camera-info-manager ros-indigo-ardrone-autonomy libsdl1.2-dev libsdl1.2-dev libudev-dev libiw-dev
+
+#For build by catkin hector-quadrotor
+sudo apt install ros-indigo-hector-quadrotor
+sudo apt install ros-indigo-gazebo-ros-control
+sudo apt install ros-indigo-geographic-msgs
+
+#Resolving gazebo models problems
+#You need download gazebo models into ~/.gazebo/models folder
+git clone https://bitbucket.org/osrf/gazebo_models
+
+#If drone doesn't stop take off need to install some hector paks
+sudo apt-get install ros-indigo-hector-gazebo
+sudo apt-get install ros-indigo-hector-sensors-gazebo
+sudo apt-get install ros-indigo-hector-xacro-tools
+
+#Some tutorials
+http://cs460.coins-lab.org/index.php?title=Lab_01._Ar.Drone_Motion
+https://hub.packtpub.com/using-ros-uavs/
+http://wiki.coins-lab.org/index.php?title=Simulation_of_AR_Parrot_2
+
+
+#Multiple drones
+https://github.com/thinclab/thinc_simulator
+
+#Commands for ARDrone
+rostopic pub /ardrone/takeoff std_msgs/Empty "{}"
+
+rostopic info /ardrone/imu
+
+rosmsg show std_msgs/Bool
+
+# fly forward
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+rostopic pub -r 10 /ardrone_2/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 1.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+rostopic pub -r 10 /ardrone_3/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+
+
+######################### Make sim with multiple drones #########################
+
+# Package clone in catkin src folder
+mkdir /hector_quadrotor_tutorial
+cd /hector_quadrotor_tutorial
+wstool init src https://raw.github.com/tu-darmstadt-ros-pkg/hector_quadrotor/indigo-devel/tutorials.rosinstall
+
+#go to root catkin folder and execute command
+catkin_make
+
+#then this command
+source devel/setup.bash
+
+#let's start gazebo 
+rosrun gazebo_ros gazebo
+
+#In another terminal window start roscore
+roscore
+
+#Then in new terminal window start spawn_two_quadrotors launch file 
+roslaunch hector_quadrotor_gazebo spawn_two_quadrotors.launch
+
+#fly up second drone	
+rostopic pub -r 10 /uav2/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 1.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+#stop rotors
+rostopic pub -r 10 /uav2/cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+
+#Reset sim, model poses and time
+import rospy
+import std_srvs.srv 
+rospy.wait_for_service('/gazebo/reset_simulation')
+reset_simulation = rospy.ServiceProxy('/gazebo/reset_simulation', std_srvs.srv.Empty)
+# invoke
+reset_simulation()
+
+#Python 2D Point class
+https://gist.github.com/hirokai/9202782
+
+#########################Docker#######################################
+https://tecadmin.net/install-docker-on-ubuntu/
+
+
+------For ROS removing-------
+sudo apt-get purge ros-*
+sudo apt-get autoremove
+# Check ~/.bashrc for ros keywords
+sudo rm -rf /etc/ros/rosdep/20-default.list
+sudo rm -rf ~/.ros ~/.zshrc
+# Reboot your OS
+# Then check that no ROS global vars exist
+echo $ROS_PACKAGE_PATH
+
+
+https://answers.ros.org/question/286242/cant-find-python-script-of-different-ros-package-in-pycharm/
+http://wiki.ros.org/Installation/Source
+
+
+
+#Expamle of topic: move drone to the certain point
+import rospy
+from std_msgs.msg import Empty
+from nav_msgs.msg import Odometry
+from tf.transformations import euler_from_quaternion
+from geometry_msgs.msg import Point, Twist
+from math import atan2
+
+
+x = 0.0
+y = 0.0
+theta = 0.0
+
+
+def new_odom(self, msg):
+    global x
+    global y
+    global theta
+
+    x = msg.pose.pose.position.x
+    y = msg.pose.pose.position.y
+
+    rot_q = msg.pose.pose.orientation
+    (roll, pitch, theta) = euler_from_quaternion([rot_q.x, rot_q.y, rot_q.z, rot_q.w])
+
+
+def move():
+    # Starts a new node
+    rospy.init_node('drone_certain_pos', anonymous=True)
+    pub = rospy.Publisher("ardrone_3/takeoff", Empty, queue_size=1)
+    sub = rospy.Subscriber("ardrone_3/ground_truth/state", Odometry, new_odom)
+    velocity_publisher = rospy.Publisher('ardrone_3/cmd_vel', Twist, queue_size=1)
+    ar_speed = Twist()
+
+    r = rospy.Rate(4)
+
+    goal = Point()
+    goal.x = 0
+    goal.y = -4
+
+    # Receiveing the user's input
+    # print("Let's move your robot")
+
+    pub.publish(Empty())
+
+    while not rospy.is_shutdown():
+        inc_x = goal.x - x
+        inc_y = goal.y - y
+
+        angle_to_goal = atan2(inc_y, inc_x)
+
+        angmod = abs(angle_to_goal - theta)
+
+        if angmod > 0.1:
+            ar_speed.linear.x = 0.0
+            ar_speed.angular.z = 0.3
+        else:
+            ar_speed.linear.x = 0.5
+            ar_speed.angular.z = 0.0
+
+        velocity_publisher.publish(ar_speed)
+        r.sleep()
+
+
+if __name__ == '__main__':
+    try:
+        # Testing our function
+        move()
+    except rospy.ROSInterruptException:
+        pass
